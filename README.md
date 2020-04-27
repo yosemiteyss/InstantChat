@@ -1,5 +1,5 @@
 # InstantChat
-A Whatsapp contacts helper with material design guidelines
+A Whatsapp contacts helper built with material design guidelines
 
 
 ## Screenshots
