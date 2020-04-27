@@ -1,0 +1,18 @@
+<resources>
+
+    <style name="Widget.InstantChat.TabLayout.PrimarySurface" parent="Widget.MaterialComponents.TabLayout.PrimarySurface">
+        <item name="tabIndicatorFullWidth">false</item>
+    </style>
+
+    <style name="Widget.InstantChat.TextInputLayout.FilledBox.PrimarySurface" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.InstantChat.TextInputLayout.FilledBox</item>
+        <item name="boxBackgroundColor">?attr/colorPrimarySurfaceVariant</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/color_on_primary_surface_emphasis_medium</item>
+        <item name="android:textColorHint">@color/color_on_primary_surface_emphasis_high</item>
+        <item name="startIconTint">@color/color_on_primary_surface_emphasis_high</item>
+        <item name="endIconTint">@color/color_on_primary_surface_emphasis_high</item>
+    </style>
+
+</resources>

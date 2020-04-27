@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">InstantChat</string>
+
+    <!-- Tab title -->
+    <string name="tab_private_title">Private</string>
+    <string name="tab_work_title">Work</string>
+    <string name="tab_settings_title">Settings</string>
+
+    <!-- Input hints -->
+    <string name="country_code_input_hint">Country Code</string>
+    <string name="phone_number_input_hint">Phone Number</string>
+
+    <!-- Contact item -->
+    <string name="contact_phone_num_title">+%s %s</string>
+
+    <!-- Content descriptions -->
+    <string name="app_icon_image_content_desc">App Icon</string>
+    <string name="contact_avatar_image_content_desc">Contact Icon</string>
+    <string name="no_contact_image_content_desc">Image of no contact</string>
+
+    <!-- Button -->
+    <string name="add_contact_button_title">Chat</string>
+    
+    <!-- Menu -->
+    <string name="edit_contact_title">Edit</string>
+    <string name="remove_contact_title">Remove</string>
+
+    <!-- No item page -->
+    <string name="no_contact_title">No Contact, yet</string>
+    <string name="no_contact_content">Enter phone number to start a new chat</string>
+
+    <!-- Settings -->
+    <string name="settings_delete_contacts_title">Remove all records</string>
+    <string name="settings_delete_contacts_message">Do you want to remove all the saved numbers?</string>
+    <string name="settings_theme_title">App Theme</string>
+    <string name="settings_default_client_title">Default Client</string>
+    <string name="settings_show_keyboard_title">Show Keyboard On Start</string>
+
+    <!-- Theme-->
+    <string name="theme_light_title">Light</string>
+    <string name="theme_dark_title">Dark</string>
+    <string name="theme_system_title">System Default</string>
+    <string name="theme_battery_saver_title">Set by Battery Saver</string>
+
+    <!-- WhatsApp clients -->
+    <string name="waclient_default_title">WhatsApp</string>
+    <string name="waclient_business_title">WhatsApp Business</string>
+    <string name="waclient_activity_not_found_message">WhatsApp client is not installed! Check your settings.</string>
+
+</resources>

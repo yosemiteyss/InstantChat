@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="contact"
+            type="com.yosemitedev.instantchat.model.Contact" />
+        <variable
+            name="contactListener"
+            type="com.yosemitedev.instantchat.ui.overview.contact.ContactAdapter.ContactAdapterListener" />
+        <import
+            type="com.yosemitedev.instantchat.model.ContactKt"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> contactListener.onContactClicked(contact)}"
+        android:onLongClick="@{(view) -> contactListener.onContactLongClicked(view, contact)}"
+        android:paddingStart="@dimen/spacing_mlarge"
+        android:paddingEnd="@dimen/spacing_mlarge"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_large">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/contact_avatar_card_view"
+            android:layout_width="@dimen/contact_icon_size"
+            android:layout_height="@dimen/contact_icon_size"
+            android:layout_centerVertical="true"
+            app:shapeAppearance="@style/ShapeAppearance.InstantChat.SmallComponent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/contact_avatar_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/contact_avatar_image_content_desc"
+                app:glideSrc="@{contact.avatar}"
+                tools:src="@drawable/avatar_1_raster"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/contact_phone_num_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_mlarge"
+            android:layout_toEndOf="@id/contact_avatar_card_view"
+            android:text="@{@string/contact_phone_num_title(contact.countryCode, contact.phoneNum)}"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/contact_access_date_text_view"
+            app:layout_constraintStart_toEndOf="@+id/contact_avatar_card_view"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="+1 2025550127" />
+
+        <TextView
+            android:id="@+id/contact_access_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_phone_num_text_view"
+            android:layout_marginStart="@dimen/spacing_mlarge"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_toEndOf="@id/contact_avatar_card_view"
+            android:text="@{ContactKt.getRelativeTimeSpan(contact)}"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textColor="@color/color_on_surface_emphasis_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contact_avatar_card_view"
+            app:layout_constraintTop_toBottomOf="@+id/contact_phone_num_text_view"
+            tools:text="Last used: 2019-01-02" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
