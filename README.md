@@ -3,4 +3,4 @@ A Whatsapp contacts helper with material design guidelines
 
 
 ## Screenshots
-<img src="https://github.com/yosemiteyss/InstantChat/blob/master/screenshots/screenshot_1.png" width="200">
+<img src="https://github.com/yosemiteyss/InstantChat/blob/master/screenshots/screenshot_1.png" width="250">
