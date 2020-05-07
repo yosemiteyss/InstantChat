@@ -1,5 +1,5 @@
 # InstantChat
-A WhatsApp contacts helper built with material design guidelines
+A WhatsApp contacts helper built with material design guidelines.
 
 ## Functions
 - Manage anonymous contacts
