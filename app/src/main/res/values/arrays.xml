@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="waclient_names">
+        <item>@string/waclient_default_title</item>
+        <item>@string/waclient_business_title</item>
+    </string-array>
+
+    <string-array name="theme_names">
+        <item>@string/theme_light_title</item>
+        <item>@string/theme_dark_title</item>
+        <item>@string/theme_battery_saver_title</item>
+    </string-array>
+
+    <string-array name="theme_names_q">
+        <item>@string/theme_light_title</item>
+        <item>@string/theme_dark_title</item>
+        <item>@string/theme_system_title</item>
+    </string-array>
+
+    <string-array name="themes_values">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System Default</item>
+    </string-array>
+
+</resources>

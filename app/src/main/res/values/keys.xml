@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_key_client" translatable="false">pref_key_client</string>
+    <string name="pref_key_theme" translatable="false">pref_key_theme</string>
+    <string name="pref_key_remove_all" translatable="false">pref_key_remove_all</string>
+    <string name="pref_key_show_keyboard" translatable="false">pref_key_show_keyboard</string>
+</resources>

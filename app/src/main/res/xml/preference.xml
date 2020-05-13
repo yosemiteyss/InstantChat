@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:icon="@drawable/ic_whatsapp"
+        android:key="@string/pref_key_client"
+        android:title="@string/settings_default_client_title"
+        app:useSimpleSummaryProvider="true" />
+
+    <ListPreference
+        android:icon="@drawable/ic_format_color_fill"
+        android:key="@string/pref_key_theme"
+        android:title="App Theme"
+        app:useSimpleSummaryProvider="true" />
+
+    <Preference
+        android:icon="@drawable/ic_account_remove"
+        android:key="@string/pref_key_remove_all"
+        android:title="@string/settings_remove_all_title" />
+
+    <SwitchPreference
+        android:icon="@drawable/ic_keyboard"
+        android:key="@string/pref_key_show_keyboard"
+        android:title="@string/settings_show_keyboard_title" />
+
+</PreferenceScreen>
