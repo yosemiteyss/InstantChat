@@ -3,9 +3,7 @@ package com.yosemitedev.instantchat.repository
 import android.content.Intent
 import com.yosemitedev.instantchat.utils.*
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class SettingsRepository @Inject constructor(
     private val prefsHelper: PreferencesHelper,
     private val waClientHelper: WAClientHelper,

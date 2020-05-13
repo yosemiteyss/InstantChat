@@ -6,6 +6,7 @@ import dagger.Subcomponent
 @FragmentScope
 @Subcomponent(
     modules = [
+        SettingsModule::class,
         SettingsViewModelModule::class
     ]
 )
