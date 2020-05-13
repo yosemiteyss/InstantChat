@@ -5,10 +5,16 @@ import android.net.Uri
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val WHATSAPP_URL = "https://api.whatsapp.com"
-
 @Singleton
 class WAClientHelper @Inject constructor() {
+
+    fun getClients(): List<WAClient> {
+        return listOf(WAClient.DEFAULT, WAClient.BUSINESS)
+    }
+
+    fun getDefaultClient(): WAClient {
+        return WAClient.DEFAULT
+    }
 
     fun getIntent(
         client: WAClient,
@@ -21,10 +27,8 @@ class WAClientHelper @Inject constructor() {
         }
     }
 
-    fun getDefaultClient(): WAClient = WAClient.DEFAULT
-
-    fun getClients(): List<WAClient> {
-        return listOf(WAClient.DEFAULT, WAClient.BUSINESS)
+    companion object {
+        private const val WHATSAPP_URL = "https://api.whatsapp.com"
     }
 }
 

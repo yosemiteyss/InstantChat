@@ -1,13 +1,12 @@
-package com.yosemitedev.instantchat.ui
+package com.yosemitedev.instantchat.utils
 
 import androidx.annotation.DrawableRes
 import com.yosemitedev.instantchat.R
 import javax.inject.Inject
-import javax.inject.Singleton
 
-object AvatarStore {
+class AvatarStore @Inject constructor() {
 
-    private val avatars = listOf(
+    val avatars = listOf(
         R.drawable.avatar_1_raster,
         R.drawable.avatar_2_raster,
         R.drawable.avatar_3_raster,

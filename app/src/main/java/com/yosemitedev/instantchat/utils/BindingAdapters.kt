@@ -1,36 +1,128 @@
+/*
+ *   Copyright (c) 2019 Google Inc.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of the License at
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software distributed under
+ *   the License
+ *
+ *   is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ *   express or implied. See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 package com.yosemitedev.instantchat.utils
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.ImageView
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.google.android.material.elevation.ElevationOverlayProvider
+
+@BindingAdapter("requestFocus")
+fun View.bindRequestFocus(requestFocus: Boolean) {
+    if (requestFocus) {
+        this.requestFocus()
+    }
+}
+
+@BindingAdapter("popupElevationOverlay")
+fun Spinner.bindPopupElevationOverlay(popupElevationOverlay: Float) {
+    setPopupBackgroundDrawable(
+        ColorDrawable(
+            ElevationOverlayProvider(context)
+                .compositeOverlayWithThemeSurfaceColorIfNeeded(popupElevationOverlay)
+        )
+    )
+}
 
 @BindingAdapter(
-    "glideSrc"
+    "drawableStart",
+    "drawableLeft",
+    "drawableTop",
+    "drawableEnd",
+    "drawableRight",
+    "drawableBottom",
+    requireAll = false
 )
-fun ImageView.bindGlideSrc(
-    drawable: Drawable?
+fun TextView.bindDrawables(
+    @DrawableRes drawableStart: Int? = null,
+    @DrawableRes drawableLeft: Int? = null,
+    @DrawableRes drawableTop: Int? = null,
+    @DrawableRes drawableEnd: Int? = null,
+    @DrawableRes drawableRight: Int? = null,
+    @DrawableRes drawableBottom: Int? = null
 ) {
-    if (drawable == null) return
-    createGlideRequest(
-        context,
-        drawable
-    ).into(this)
+    setCompoundDrawablesWithIntrinsicBounds(
+        context.getDrawableOrNull(drawableStart ?: drawableLeft),
+        context.getDrawableOrNull(drawableTop),
+        context.getDrawableOrNull(drawableEnd ?: drawableRight),
+        context.getDrawableOrNull(drawableBottom)
+    )
 }
 
-private fun createGlideRequest(
-    context: Context,
-    drawable: Drawable
-): RequestBuilder<Drawable> {
-    return Glide.with(context).load(drawable)
+/*
+/**
+ * Set a Chip's leading icon using Glide.
+ *
+ * Optionally set the image to be center cropped and/or cropped to a circle.
+ */
+@BindingAdapter(
+    "glideChipIcon",
+    "glideChipIconCenterCrop",
+    "glideChipIconCircularCrop",
+    requireAll = false
+)
+fun Chip.bindGlideChipSrc(
+    @DrawableRes drawableRes: Int?,
+    centerCrop: Boolean = false,
+    circularCrop: Boolean = false
+) {
+    if (drawableRes == null) return
+
+    createGlideRequest(
+        context,
+        drawableRes,
+        centerCrop,
+        circularCrop
+    ).listener(object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean = true
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            chipIcon = resource
+            return true
+        }
+    }).submit(
+        resources.getDimensionPixelSize(R.dimen.chip_icon_diameter),
+        resources.getDimensionPixelSize(R.dimen.chip_icon_diameter)
+    )
 }
+*/
 
 @BindingAdapter(
     "glideSrc",
@@ -65,9 +157,13 @@ private fun createGlideRequest(
     return req
 }
 
-private fun dpToPixel(context: Context, dp: Float): Int {
-    val density = context.resources.displayMetrics.density
-    return (dp * density).toInt()
+@BindingAdapter("goneIf")
+fun View.bindGoneIf(gone: Boolean) {
+    visibility = if (gone) {
+        GONE
+    } else {
+        VISIBLE
+    }
 }
 
 @BindingAdapter("layoutFullscreen")

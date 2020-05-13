@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstantChat.DayNight">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.InstantChat.Splash.DayNight"
             android:screenOrientation="portrait">
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.contact.MainActivity"
             android:theme="@style/Theme.InstantChat.DayNight"
             android:screenOrientation="portrait">
 

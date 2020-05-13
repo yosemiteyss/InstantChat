@@ -1,50 +1,56 @@
 <resources>
     <string name="app_name">InstantChat</string>
 
-    <!-- Tab title -->
-    <string name="tab_private_title">Private</string>
-    <string name="tab_work_title">Work</string>
+    <!-- Home Fragment -->
+    <string name="app_icon_image_content_desc">App Icon</string>
+    <string name="contact_type_private_title">Private</string>
+    <string name="contact_type_work_title">Work</string>
     <string name="tab_settings_title">Settings</string>
+    <string name="chat_button_title">Chat</string>
 
-    <!-- Input hints -->
+    <!-- Hints -->
+    <string name="contact_name_input_hint">Name</string>
     <string name="country_code_input_hint">Country Code</string>
     <string name="phone_number_input_hint">Phone Number</string>
+    <string name="contact_type_input_hint">Category</string>
 
-    <!-- Contact item -->
-    <string name="contact_phone_num_title">+%s %s</string>
-
-    <!-- Content descriptions -->
-    <string name="app_icon_image_content_desc">App Icon</string>
-    <string name="contact_avatar_image_content_desc">Contact Icon</string>
-    <string name="no_contact_image_content_desc">Image of no contact</string>
-
-    <!-- Button -->
-    <string name="add_contact_button_title">Chat</string>
-    
-    <!-- Menu -->
-    <string name="edit_contact_title">Edit</string>
-    <string name="remove_contact_title">Remove</string>
-
-    <!-- No item page -->
+    <!-- Contact Item -->
+    <string name="contact_item_phone_num">+%s %s</string>
+    <string name="contact_edit_title">Edit</string>
+    <string name="contact_remove_title">Remove</string>
     <string name="no_contact_title">No Contact, yet</string>
     <string name="no_contact_content">Enter phone number to start a new chat</string>
+    <string name="contact_avatar_image_content_desc">Contact Icon</string>
+    <string name="no_contact_image_content_desc">No Contact</string>
 
     <!-- Settings -->
-    <string name="settings_delete_contacts_title">Remove all records</string>
-    <string name="settings_delete_contacts_message">Do you want to remove all the saved numbers?</string>
+    <string name="settings_remove_all_title">Remove all contacts</string>
+    <string name="settings_remove_all_message">Do you want to remove all the saved numbers?</string>
     <string name="settings_theme_title">App Theme</string>
-    <string name="settings_default_client_title">Default Client</string>
+    <string name="settings_default_client_title">Default App</string>
     <string name="settings_show_keyboard_title">Show Keyboard On Start</string>
 
-    <!-- Theme-->
+    <!-- Theme -->
     <string name="theme_light_title">Light</string>
     <string name="theme_dark_title">Dark</string>
     <string name="theme_system_title">System Default</string>
     <string name="theme_battery_saver_title">Set by Battery Saver</string>
 
-    <!-- WhatsApp clients -->
+    <!-- WAClients -->
     <string name="waclient_default_title">WhatsApp</string>
     <string name="waclient_business_title">WhatsApp Business</string>
     <string name="waclient_activity_not_found_message">WhatsApp client is not installed! Check your settings.</string>
+
+    <!-- Contact Edit -->
+    <string name="contact_edit_app_bar_title">Edit</string>
+    <string name="contact_edit_info_title">Info</string>
+    <string name="contact_edit_avatar_title">Icon</string>
+    <string name="contact_edit_name_image_content_desc">Edit Contact Name</string>
+    <string name="contact_edit_country_code_image_content_desc">Edit Country Code</string>
+    <string name="contact_edit_phone_number_image_content_desc">Edit Phone Number</string>
+    <string name="contact_edit_type_image_content_desc">Edit Contact Type</string>
+    <string name="avatar_item_checked_image_content_desc">Checked Icon</string>
+    <string name="contact_edit_country_code_empty">Country code cannot be empty.</string>
+    <string name="contact_edit_phone_number_empty">Phone number cannot be empty.</string>
 
 </resources>

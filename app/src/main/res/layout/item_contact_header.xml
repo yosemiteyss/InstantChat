@@ -6,7 +6,7 @@
     <data>
         <variable
             name="header"
-            type="com.yosemitedev.instantchat.ui.overview.contact.ContactHeaderItem" />
+            type="com.yosemitedev.instantchat.ui.contact.ContactHeaderItem" />
     </data>
 
     <TextView
@@ -20,6 +20,7 @@
         android:textStyle="bold"
         android:textAppearance="?attr/textAppearanceSubtitle2"
         android:textColor="@color/color_on_surface_emphasis_medium"
+        android:textAllCaps="true"
         tools:text="Private"/>
 
 </layout>

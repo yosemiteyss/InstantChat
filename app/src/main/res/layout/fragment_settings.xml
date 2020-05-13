@@ -1,91 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.yosemitedev.instantchat.ui.overview.settings.SettingsViewModel" />
-    </data>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/settings_container"
+    <LinearLayout
+        android:id="@+id/settings_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/settings_header_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_mlarge"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:text="@string/tab_settings_title"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            android:textColor="@color/color_on_surface_emphasis_medium"
+            android:textStyle="bold"
+            tools:text="Settings" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/preference_fragment_container_view"
+            android:name="com.yosemitedev.instantchat.ui.settings.PreferenceFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/settings_header_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_mlarge"
-                android:layout_marginTop="@dimen/spacing_mlarge"
-                android:layout_marginBottom="@dimen/spacing_large"
-                android:text="@string/tab_settings_title"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:textColor="@color/color_on_surface_emphasis_medium"
-                tools:text="Settings"/>
-
-            <TextView
-                android:id="@+id/settings_client_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_mlarge"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:text="@string/settings_default_client_title"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:drawableStart="@drawable/ic_whatsapp"
-                android:drawablePadding="@dimen/spacing_large" />
-
-            <TextView
-                android:id="@+id/settings_themes_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_mlarge"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:text="@string/settings_theme_title"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:drawableStart="@drawable/ic_format_color_fill"
-                android:drawablePadding="@dimen/spacing_large" />
-
-            <TextView
-                android:id="@+id/settings_delete_contacts_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_mlarge"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:text="@string/settings_delete_contacts_title"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:drawableStart="@drawable/ic_account_remove_outline"
-                android:drawablePadding="@dimen/spacing_large" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/settings_show_keyboard_switch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_mlarge"
-                android:gravity="center_vertical"
-                android:text="@string/settings_show_keyboard_title"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:drawableStart="@drawable/ic_keyboard"
-                android:drawablePadding="@dimen/spacing_large"
-                android:checked="@{viewModel.showKeyboard}"/>
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 </layout>

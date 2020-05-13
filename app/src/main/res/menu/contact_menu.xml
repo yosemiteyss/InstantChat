@@ -5,13 +5,13 @@
     <item
         android:id="@+id/contact_edit"
         android:icon="@drawable/ic_edit"
-        android:title="@string/edit_contact_title"
+        android:title="@string/contact_edit_title"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/contact_remove"
         android:icon="@drawable/ic_clear"
-        android:title="@string/remove_contact_title"
+        android:title="@string/contact_remove_title"
         app:showAsAction="ifRoom"/>
 
 </menu>

@@ -1,8 +1,8 @@
-package com.yosemitedev.instantchat.db
+package com.yosemitedev.instantchat.persistence
 
 import androidx.room.TypeConverter
 import com.yosemitedev.instantchat.model.ContactType
-import java.util.Date
+import java.util.*
 
 class Converters {
 

@@ -1,106 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.yosemitedev.instantchat.ui.contact.ContactEditViewModel" />
+
+        <import type="com.yosemitedev.instantchat.model.ContactType" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="?attr/colorPrimary">
+        android:focusableInTouchMode="true">
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="Edit"
-            app:navigationIcon="@drawable/ic_clear"/>
+            android:layout_height="wrap_content">
 
-        <LinearLayout
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/contact_edit_app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="noScroll"
+                app:navigationIcon="@drawable/ic_clear"
+                app:paddingTopSystemWindowInsets="@{true}"
+                app:title="@string/contact_edit_app_bar_title" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="?attr/colorSurface">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <TextView
+                android:id="@+id/contact_edit_info_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_marginBottom="@dimen/spacing_large"
                 android:layout_marginStart="@dimen/spacing_mlarge"
-                android:text="Contact Info"
-                android:textStyle="bold"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="@string/contact_edit_info_title"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:textColor="@color/color_on_surface_emphasis_medium"
-                android:textAppearance="?attr/textAppearanceSubtitle2"/>
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/contact_edit_name_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:contentDescription="@string/contact_edit_name_image_content_desc"
+                android:src="@drawable/ic_face"
+                app:layout_constraintBottom_toBottomOf="@+id/contact_edit_name_text_input_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/contact_edit_name_text_input_layout"
+                app:tint="@color/color_on_surface_emphasis_medium" />
 
-                <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contact_edit_name_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:layout_marginEnd="@dimen/spacing_mlarge"
+                android:hint="@string/contact_name_input_hint"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/contact_edit_name_image_view"
+                app:layout_constraintTop_toBottomOf="@id/contact_edit_info_title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contact_edit_name_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:maxLines="1"
+                    android:text="@{viewModel.contact.name}" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_mlarge"
-                        android:layout_marginEnd="@dimen/spacing_mlarge"
-                        android:hint="@string/country_code_input_hint">
+            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/contact_edit_country_code_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:contentDescription="@string/contact_edit_country_code_image_content_desc"
+                android:src="@drawable/ic_public"
+                app:layout_constraintBottom_toBottomOf="@+id/contact_edit_country_code_text_input_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/contact_edit_country_code_text_input_layout"
+                app:tint="@color/color_on_surface_emphasis_medium" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contact_edit_country_code_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:layout_marginEnd="@dimen/spacing_mlarge"
+                android:hint="@string/country_code_input_hint"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/contact_edit_country_code_image_view"
+                app:layout_constraintTop_toBottomOf="@id/contact_edit_name_text_input_layout">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_mlarge"
-                        android:layout_marginEnd="@dimen/spacing_mlarge"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:hint="@string/phone_number_input_hint">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contact_edit_country_code_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="7"
+                    android:maxLines="1"
+                    android:text="@{viewModel.contact.countryCode}" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/contact_edit_phone_number_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:contentDescription="@string/contact_edit_phone_number_image_content_desc"
+                android:src="@drawable/ic_call"
+                app:layout_constraintBottom_toBottomOf="@+id/contact_edit_phone_number_text_input_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/contact_edit_phone_number_text_input_layout"
+                app:tint="@color/color_on_surface_emphasis_medium" />
 
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_marginStart="@dimen/spacing_mlarge"
-                        android:layout_marginEnd="@dimen/spacing_mlarge"
-                        android:orientation="horizontal"
-                        android:checkedButton="@id/contact_edit_private_button">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contact_edit_phone_number_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:layout_marginEnd="@dimen/spacing_mlarge"
+                android:hint="@string/phone_number_input_hint"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/contact_edit_phone_number_image_view"
+                app:layout_constraintTop_toBottomOf="@id/contact_edit_country_code_text_input_layout">
 
-                        <com.google.android.material.radiobutton.MaterialRadioButton
-                            android:id="@+id/contact_edit_private_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Private"
-                            android:textAppearance="?attr/textAppearanceButton"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contact_edit_phone_number_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:text="@{viewModel.contact.phoneNum}" />
 
-                        <com.google.android.material.radiobutton.MaterialRadioButton
-                            android:id="@+id/contact_edit_work_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/spacing_large"
-                            android:text="Work"
-                            android:textAppearance="?attr/textAppearanceButton"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    </RadioGroup>
+            <ImageView
+                android:id="@+id/contact_edit_type_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:contentDescription="@string/contact_edit_type_image_content_desc"
+                android:src="@drawable/ic_work_outline"
+                app:layout_constraintBottom_toBottomOf="@+id/contact_edit_type_text_input_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/contact_edit_type_text_input_layout"
+                app:tint="@color/color_on_surface_emphasis_medium" />
 
-                </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contact_edit_type_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:layout_marginEnd="@dimen/spacing_mlarge"
+                android:hint="@string/contact_type_input_hint"
+                app:layout_constraintStart_toEndOf="@+id/contact_edit_type_image_view"
+                app:layout_constraintTop_toBottomOf="@+id/contact_edit_phone_number_text_input_layout">
 
-            </androidx.core.widget.NestedScrollView>
+                <AutoCompleteTextView
+                    android:id="@+id/contact_edit_type_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:labelFor="@id/contact_edit_type_text_view" />
 
-        </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/contact_edit_avatar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mlarge"
+                android:layout_marginTop="@dimen/spacing_mxlarge"
+                android:text="@string/contact_edit_avatar_title"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/color_on_surface_emphasis_medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contact_edit_type_text_input_layout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contact_edit_avatar_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingStart="@dimen/spacing_mlarge"
+                android:paddingEnd="@dimen/spacing_mlarge"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contact_edit_avatar_title"
+                app:spanCount="4"
+                tools:listitem="@layout/item_avatar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/contact_edit_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/spacing_mlarge"
+            app:srcCompat="@drawable/ic_check" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

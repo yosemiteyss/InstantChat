@@ -1,11 +1,9 @@
 <resources>
 
-    <style name="Widget.InstantChat.TabLayout.PrimarySurface" parent="Widget.MaterialComponents.TabLayout.PrimarySurface">
-        <item name="tabIndicatorFullWidth">false</item>
-    </style>
-
     <style name="Widget.InstantChat.TextInputLayout.FilledBox.PrimarySurface" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.InstantChat.TextInputLayout.FilledBox</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.InstantChat.TextInputLayout.FilledBox
+        </item>
         <item name="boxBackgroundColor">?attr/colorPrimarySurfaceVariant</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
@@ -13,6 +11,36 @@
         <item name="android:textColorHint">@color/color_on_primary_surface_emphasis_high</item>
         <item name="startIconTint">@color/color_on_primary_surface_emphasis_high</item>
         <item name="endIconTint">@color/color_on_primary_surface_emphasis_high</item>
+    </style>
+
+    <style name="Widget.InstantChat.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@drawable/tab_layout_background</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabBackground">@drawable/tab_background</item>
+        <item name="tabPaddingStart">@dimen/spacing_medium</item>
+        <item name="tabPaddingEnd">@dimen/spacing_medium</item>
+        <item name="tabIndicatorHeight">@dimen/spacing_none</item>
+        <item name="tabRippleColor">@null</item>
+        <item name="tabTextAppearance">?attr/textAppearanceSubtitle2</item>
+        <item name="tabTextColor">@color/color_on_primary_surface_emphasis_high</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimarySurface</item>
+    </style>
+
+    <style name="Widget.InstantChat.PreferenceScreen" parent="Preference.PreferenceScreen">
+        <!-- Typography -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.InstantChat.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.InstantChat.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.InstantChat.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.InstantChat.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.InstantChat.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.InstantChat.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.InstantChat.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.InstantChat.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.InstantChat.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.InstantChat.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.InstantChat.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.InstantChat.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.InstantChat.Overline</item>
     </style>
 
 </resources>

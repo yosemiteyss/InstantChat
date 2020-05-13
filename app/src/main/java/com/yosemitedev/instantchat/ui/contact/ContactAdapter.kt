@@ -1,4 +1,4 @@
-package com.yosemitedev.instantchat.ui.overview.contact
+package com.yosemitedev.instantchat.ui.contact
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -11,7 +11,8 @@ import com.yosemitedev.instantchat.R
 import com.yosemitedev.instantchat.databinding.ItemContactBinding
 import com.yosemitedev.instantchat.databinding.ItemContactHeaderBinding
 import com.yosemitedev.instantchat.model.Contact
-import com.yosemitedev.instantchat.ui.overview.contact.ContactViewHolder.*
+import com.yosemitedev.instantchat.ui.contact.ContactViewHolder.ContactHeaderViewHolder
+import com.yosemitedev.instantchat.ui.contact.ContactViewHolder.ContactItemViewHolder
 
 class ContactAdapter(
     private val listener: ContactAdapterListener,
@@ -21,19 +22,16 @@ class ContactAdapter(
     var contacts: List<Contact> = emptyList()
         set(value) {
             field = value
-            differ.submitList(buildMergedList(contactItems = value))
+            differ.submitList(buildList(contactItems = value))
         }
 
-    private val headerItem = ContactHeaderItem(headerTitle)
+    private val headerItem =
+        ContactHeaderItem(headerTitle)
 
-    private val differ = AsyncListDiffer(this,
-        DiffCallback
+    private val differ = AsyncListDiffer(
+        this,
+        ContactItemDiffCallback
     )
-
-    interface ContactAdapterListener {
-        fun onContactClicked(contact: Contact)
-        fun onContactLongClicked(view: View, contact: Contact): Boolean
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -72,25 +70,30 @@ class ContactAdapter(
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    private fun buildMergedList(
+    private fun buildList(
         contactHeaderItem: ContactHeaderItem = headerItem,
         contactItems: List<Contact> = contacts
-    ) : List<Any> {
+    ): List<Any> {
         val mergedList = mutableListOf<Any>(contactHeaderItem)
         mergedList.addAll(contactItems)
         return mergedList
+    }
+
+    interface ContactAdapterListener {
+        fun onContactClicked(contact: Contact)
+        fun onContactLongClicked(view: View, contact: Contact): Boolean
     }
 }
 
 data class ContactHeaderItem(val title: String)
 
-object DiffCallback : DiffUtil.ItemCallback<Any>() {
+object ContactItemDiffCallback : DiffUtil.ItemCallback<Any>() {
 
     override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
         return when {
             oldItem is Contact && newItem is Contact ->
                 oldItem.countryCode == newItem.countryCode &&
-                oldItem.phoneNum == newItem.phoneNum
+                        oldItem.phoneNum == newItem.phoneNum
             else -> true
         }
     }

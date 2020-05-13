@@ -63,7 +63,7 @@
 
         <!-- Styles -->
         <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
-        <item name="tabStyle">@style/Widget.InstantChat.TabLayout.PrimarySurface</item>
+        <item name="tabStyle">@style/Widget.InstantChat.TabLayout</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
 
         <!-- System -->
