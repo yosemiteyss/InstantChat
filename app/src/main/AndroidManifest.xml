@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.contact.MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/Theme.InstantChat.DayNight"
             android:screenOrientation="portrait">
 

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Extra attribute for combining colorPrimary and colorSurface -->
-    <attr name="colorPrimarySurfaceVariant" format="color"/>
-
-    <!-- Specify levels of emphasis -->
-    <attr name="emphasisHighAlpha" format="float"/>
-    <attr name="emphasisMediumAlpha" format="float"/>
-    <attr name="emphasisDisabledAlpha" format="float"/>
 
     <!-- Specify interpolator of different motion -->
     <attr name="motionInterpolatorPersistent" format="float"/>
     <attr name="motionInterpolatorIncoming" format="float"/>
     <attr name="motionInterpolatorOutgoing" format="float"/>
+
+    <attr name="colorPrimaryBackground" format="color"/>
+    <attr name="colorOnPrimaryBackground" format="color"/>
+
+    <attr name="textFieldOnPrimaryBackground" format="color"/>
 
 </resources>

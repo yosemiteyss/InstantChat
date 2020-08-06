@@ -1,33 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/settings_linear_layout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/settings_header_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_mlarge"
-            android:layout_marginTop="@dimen/spacing_mlarge"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:text="@string/tab_settings_title"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceSubtitle2"
-            android:textColor="@color/color_on_surface_emphasis_medium"
-            android:textStyle="bold"
-            tools:text="Settings" />
+        android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/preference_fragment_container_view"
             android:name="com.yosemitedev.instantchat.ui.settings.PreferenceFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:paddingBottomSystemWindowInsets="@{true}"/>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </layout>

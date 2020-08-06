@@ -1,44 +1,37 @@
 package com.yosemitedev.instantchat.ui.contact
 
-import android.content.Context
-import android.content.res.ColorStateList
+import android.graphics.Canvas
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.shape.MaterialShapeDrawable
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.yosemitedev.instantchat.R
 import com.yosemitedev.instantchat.databinding.FragmentContactBinding
+import com.yosemitedev.instantchat.model.Category
 import com.yosemitedev.instantchat.model.Contact
-import com.yosemitedev.instantchat.model.ContactType
-import com.yosemitedev.instantchat.model.ContactType.PRIVATE
-import com.yosemitedev.instantchat.model.ContactType.WORK
+import com.yosemitedev.instantchat.ui.home.HomeFragmentDirections
+import com.yosemitedev.instantchat.ui.home.HomeViewModel
 import com.yosemitedev.instantchat.utils.AutoClearedValue
-import com.yosemitedev.instantchat.utils.parentViewModelProvider
+import com.yosemitedev.instantchat.utils.bindGoneIf
+import com.yosemitedev.instantchat.utils.parentViewModels
 import com.yosemitedev.instantchat.utils.themeColor
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
+@AndroidEntryPoint
 class ContactFragment : Fragment(), ContactAdapter.ContactAdapterListener {
 
-    @Inject
-    lateinit var providerFactory: ViewModelProvider.Factory
-    private lateinit var contactViewModel: ContactViewModel
+    private var binding: FragmentContactBinding by AutoClearedValue(this)
 
-    private var binding by AutoClearedValue<FragmentContactBinding>(this)
+    private val viewModel: HomeViewModel by parentViewModels()
 
-    private val contactType: ContactType by lazy {
-        requireArguments().getSerializable(ARG_CONTACT_TYPE) as ContactType
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        contactViewModel = parentViewModelProvider(providerFactory)
+    private val category: Category by lazy {
+        requireArguments().getSerializable(ARG_CATEGORY) as Category
     }
 
     override fun onCreateView(
@@ -47,105 +40,103 @@ class ContactFragment : Fragment(), ContactAdapter.ContactAdapterListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentContactBinding.inflate(inflater, container, false)
-        setupBackgroundShape()
-        setupRecyclerView()
-        return binding.root
-    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity() as MainActivity).contactComponent.inject(this)
-    }
-
-    private fun setupBackgroundShape() {
-        val backgroundContext = binding.contactFrameLayout.context
-        binding.contactFrameLayout.background = MaterialShapeDrawable(
-            backgroundContext,
-            null,
-            R.attr.bottomSheetStyle,
-            0
-        ).apply {
-            fillColor = ColorStateList.valueOf(
-                backgroundContext.themeColor(R.attr.colorSurface)
-            )
-            elevation = resources.getDimension(R.dimen.elevation_xmedium)
-            initializeElevationOverlay(requireContext())
-        }
-    }
-
-    private fun setupRecyclerView() {
-        val headerTitle = when (contactType) {
-            PRIVATE -> getString(R.string.contact_type_private_title)
-            WORK -> getString(R.string.contact_type_work_title)
-        }
-        val contactAdapter =
-            ContactAdapter(
-                this@ContactFragment,
-                headerTitle
-            )
+        // Setup recycler view
+        val contactAdapter = ContactAdapter(this)
 
         binding.contactRecyclerView.apply {
             adapter = contactAdapter
             setHasFixedSize(true)
-            isNestedScrollingEnabled = false
+            buildItemTouchHelper(contactAdapter).attachToRecyclerView(this)
         }
 
-        when (contactType) {
-            PRIVATE -> contactViewModel.privateContacts.observe(viewLifecycleOwner, Observer {
-                contactAdapter.contacts = it
-                setupNoItemLayout(it.isEmpty())
-            })
-
-            WORK -> contactViewModel.workContacts.observe(viewLifecycleOwner, Observer {
-                contactAdapter.contacts = it
-                setupNoItemLayout(it.isEmpty())
-            })
+        // Register data observers
+        viewModel.getContacts(category).observe(viewLifecycleOwner) {
+            contactAdapter.submitList(it)
+            binding.noContactLayout.root.bindGoneIf(it.isNotEmpty())
         }
-    }
 
-    private fun setupNoItemLayout(show: Boolean) {
-        if (show) {
-            binding.noContactLayout.root.visibility = View.VISIBLE
-        } else {
-            binding.noContactLayout.root.visibility = View.GONE
-        }
-    }
-
-    private fun showContactPopupMenu(view: View, contact: Contact) {
-        PopupMenu(requireContext(), view).apply {
-            menuInflater.inflate(R.menu.contact_menu, menu)
-            gravity = Gravity.END
-            setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.contact_edit -> {
-                        findNavController().navigate(
-                            HomeFragmentDirections.actionHomeFragmentToContactEditFragment(contact)
-                        )
-                    }
-                    R.id.contact_remove -> contactViewModel.deleteContact(contact)
-                }
-                true
-            }
-        }.show()
+        return binding.root
     }
 
     override fun onContactClicked(contact: Contact) {
-        contactViewModel.startChat(contact)
+        viewModel.startChat(contact)
     }
 
     override fun onContactLongClicked(view: View, contact: Contact): Boolean {
-        showContactPopupMenu(view, contact)
+        // To be implemented
         return true
     }
 
-    companion object {
-        private const val ARG_CONTACT_TYPE = "arg_contact_type"
+    private fun buildItemTouchHelper(adapter: ContactAdapter): ItemTouchHelper {
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
 
-        fun newInstance(contactType: ContactType) =
-            ContactFragment().apply {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                when (direction) {
+                    // Remove contact
+                    ItemTouchHelper.LEFT -> {
+                        val contact = adapter.getContactItem(viewHolder.adapterPosition)
+                        viewModel.deleteContact(contact)
+                    }
+                    // Edit avatar
+                    ItemTouchHelper.RIGHT -> {
+                        val contact = adapter.getContactItem(viewHolder.adapterPosition)
+                        navigateToAvatarBottomSheet(contact)
+                    }
+                }
+
+                adapter.notifyItemChanged(viewHolder.adapterPosition)
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftActionIcon(R.drawable.ic_delete)
+                    .addSwipeLeftBackgroundColor(requireContext().themeColor(R.attr.colorError))
+                    .setSwipeLeftActionIconTint(requireContext().themeColor(R.attr.colorOnError))
+                    .addSwipeRightActionIcon(R.drawable.ic_edit)
+                    .addSwipeRightBackgroundColor(requireContext().themeColor(R.attr.colorSecondary))
+                    .setSwipeRightActionIconTint(requireContext().themeColor(R.attr.colorOnSecondary))
+                    .create()
+                    .decorate()
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            }
+        }
+
+        return ItemTouchHelper(callback)
+    }
+
+
+    private fun navigateToAvatarBottomSheet(contact: Contact) {
+        findNavController().navigate(
+            HomeFragmentDirections.actionHomeFragmentToAvatarBottomSheet(contact)
+        )
+    }
+
+    companion object {
+        private const val ARG_CATEGORY = "category"
+
+        fun newInstance(category: Category): ContactFragment {
+            return ContactFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(ARG_CONTACT_TYPE, contactType)
+                    putSerializable(ARG_CATEGORY, category)
                 }
             }
+        }
     }
 }

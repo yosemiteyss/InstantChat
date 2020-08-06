@@ -4,24 +4,24 @@
 
     <ListPreference
         android:icon="@drawable/ic_whatsapp"
-        android:key="@string/pref_key_client"
+        android:key="@string/pref_key_default_client"
         android:title="@string/settings_default_client_title"
         app:useSimpleSummaryProvider="true" />
 
     <ListPreference
         android:icon="@drawable/ic_format_color_fill"
-        android:key="@string/pref_key_theme"
-        android:title="App Theme"
+        android:key="@string/pref_key_default_theme"
+        android:title="@string/settings_theme_title"
         app:useSimpleSummaryProvider="true" />
 
     <Preference
         android:icon="@drawable/ic_account_remove"
-        android:key="@string/pref_key_remove_all"
+        android:key="@string/pref_key_remove_all_contacts"
         android:title="@string/settings_remove_all_title" />
 
     <SwitchPreference
         android:icon="@drawable/ic_keyboard"
-        android:key="@string/pref_key_show_keyboard"
-        android:title="@string/settings_show_keyboard_title" />
+        android:key="@string/pref_key_navigate_to_edit"
+        android:title="@string/settings_show_input_sheet_title" />
 
 </PreferenceScreen>

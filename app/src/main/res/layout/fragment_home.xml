@@ -1,187 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.yosemitedev.instantchat.ui.contact.ContactViewModel" />
+            type="com.yosemitedev.instantchat.ui.home.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/home_constraint_layout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimarySurface"
-        android:animateLayoutChanges="true"
-        android:focusableInTouchMode="true"
-        app:paddingTopSystemWindowInsets="@{true}">
+        android:background="?attr/colorPrimaryBackground"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/home_app_icon"
-            android:layout_width="@dimen/app_icon_size"
-            android:layout_height="@dimen/app_icon_size"
-            android:layout_marginStart="@dimen/spacing_mxlarge"
-            android:layout_marginTop="@dimen/spacing_mxlarge"
-            android:contentDescription="@string/app_icon_image_content_desc"
-            android:src="@drawable/ic_app_icon"
-            android:tint="?attr/colorOnPrimarySurface"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/home_tab_layout"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="@dimen/spacing_mlarge"
-            android:layout_marginEnd="@dimen/spacing_mxlarge"
-            app:layout_constraintBottom_toBottomOf="@+id/home_app_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/home_app_icon"
-            app:layout_constraintTop_toTopOf="@+id/home_app_icon">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/home_tab_private"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contact_type_private_title" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/home_tab_work"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contact_type_work_title" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/home_tab_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tab_settings_title" />
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/home_country_code_text_input_layout"
-            style="@style/Widget.InstantChat.TextInputLayout.FilledBox.PrimarySurface"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_header_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_mxlarge"
-            android:layout_marginTop="@dimen/spacing_mxlarge"
-            android:layout_marginEnd="@dimen/spacing_mxlarge"
-            android:hint="@string/country_code_input_hint"
-            app:endIconMode="clear_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_app_icon"
-            app:startIconDrawable="@drawable/ic_public">
+            android:padding="@dimen/spacing_mxlarge"
+            android:background="?attr/colorPrimaryBackground"
+            android:focusableInTouchMode="true"
+            android:animateLayoutChanges="true"
+            app:paddingTopSystemWindowInsets="@{true}">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/home_country_code_edit_text"
+            <ImageView
+                android:id="@+id/home_header_app_icon_image_view"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_app_icon"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorOnPrimary" />
+
+            <TextView
+                android:id="@+id/home_header_app_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:text="@string/app_name"
+                android:textColor="?attr/colorOnPrimaryBackground"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toEndOf="@id/home_header_app_icon_image_view"
+                app:layout_constraintTop_toTopOf="@id/home_header_app_icon_image_view"
+                app:layout_constraintBottom_toBottomOf="@id/home_header_app_icon_image_view"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.InstantChat.ContactTextInputLayout"
+                android:id="@+id/home_header_country_code_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="7"
-                android:maxLines="1"
-                android:textColor="?attr/colorOnPrimarySurface"
-                app:requestFocus="@{viewModel.showKeyboard}" />
+                android:layout_marginTop="@dimen/spacing_mxlarge"
+                android:hint="@string/country_code_input_hint"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_public"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_header_app_icon_image_view">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/home_header_country_code_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="7"
+                    android:maxLines="1"
+                    android:textColor="?attr/colorOnPrimaryBackground" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/home_phone_number_text_input_layout"
-            style="@style/Widget.InstantChat.TextInputLayout.FilledBox.PrimarySurface"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_mxlarge"
-            android:layout_marginTop="@dimen/spacing_xmedium"
-            android:layout_marginEnd="@dimen/spacing_mxlarge"
-            android:hint="@string/phone_number_input_hint"
-            app:endIconMode="clear_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_country_code_text_input_layout"
-            app:startIconDrawable="@drawable/ic_call">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/home_phone_number_edit_text"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.InstantChat.ContactTextInputLayout"
+                android:id="@+id/home_header_phone_number_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:maxLength="15"
-                android:maxLines="1"
-                android:textColor="?attr/colorOnPrimarySurface" />
+                android:layout_marginTop="@dimen/spacing_xmedium"
+                android:hint="@string/phone_number_input_hint"
+                app:endIconMode="clear_text"
+                app:layout_constraintTop_toBottomOf="@id/home_header_country_code_text_input_layout"
+                app:startIconDrawable="@drawable/ic_call">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/home_header_phone_number_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:textColor="?attr/colorOnPrimaryBackground" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/home_header_extra_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:goneIf="@{viewModel.showExtraInputFields == false}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_header_phone_number_text_input_layout"
+                tools:visibility="visible">
+
+                <RadioGroup
+                    android:id="@+id/home_header_category_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/home_header_category_private_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/spacing_large"
+                        android:paddingEnd="@dimen/spacing_large"
+                        android:text="@string/category_private_title"
+                        android:textColor="?attr/colorOnPrimaryBackground" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/home_header_category_work_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/spacing_large"
+                        android:paddingEnd="@dimen/spacing_large"
+                        android:text="@string/category_work_title"
+                        android:textColor="?attr/colorOnPrimaryBackground"/>
+
+                </RadioGroup>
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/home_header_start_chat_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_gravity="center"
+                    android:text="@string/start_chat_button_title"
+                    app:icon="@drawable/ic_send" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:id="@+id/home_input_view"
+            android:id="@+id/home_nav_container_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:goneIf="@{!viewModel.showInputView}"
-            app:layout_constraintTop_toBottomOf="@id/home_phone_number_text_input_layout"
-            tools:visibility="visible">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/home_contact_type_radio_group"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/home_nav_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_xlarge"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_marginEnd="@dimen/spacing_xlarge"
-                android:orientation="horizontal">
+                android:paddingTop="@dimen/spacing_medium"
+                android:background="@android:color/transparent"
+                app:tabMode="fixed"
+                app:tabIndicatorFullWidth="false"
+                tools:background="?attr/colorSurface"/>
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/home_contact_type_private_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_medium"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/contact_type_private_title"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="?attr/colorOnPrimarySurface" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/home_contact_type_work_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/contact_type_work_title"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="?attr/colorOnPrimarySurface" />
-
-            </RadioGroup>
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/home_chat_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/fab_margin"
-                android:text="@string/chat_button_title"
-                app:icon="@drawable/ic_send" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/home_nav_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:background="?attr/colorSurface"/>
 
         </LinearLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/home_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/spacing_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_input_view"
-            tools:background="?attr/colorSurface" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

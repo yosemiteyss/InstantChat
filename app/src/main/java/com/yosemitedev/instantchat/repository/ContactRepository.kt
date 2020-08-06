@@ -1,72 +1,30 @@
 package com.yosemitedev.instantchat.repository
 
-import androidx.annotation.DrawableRes
-import androidx.lifecycle.LiveData
+import com.yosemitedev.instantchat.db.ContactDao
+import com.yosemitedev.instantchat.model.Category
 import com.yosemitedev.instantchat.model.Contact
-import com.yosemitedev.instantchat.model.ContactType
-import com.yosemitedev.instantchat.persistence.ContactDao
-import com.yosemitedev.instantchat.utils.AvatarStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ContactRepository @Inject constructor(
-    private val contactDao: ContactDao,
-    private val avatarStore: AvatarStore
+    private val contactDao: ContactDao
 ) {
 
-    @DrawableRes
-    fun getAvatarDrawables(): List<Int> {
-        return avatarStore.avatars
+    fun getContacts(category: Category) =
+        contactDao.getContacts(category)
+
+    suspend fun updateOrInsertContact(contact: Contact) = withContext(Dispatchers.IO) {
+        contactDao.updateOrInsertContact(contact)
     }
 
-    fun getContacts(contactType: ContactType): LiveData<List<Contact>> {
-        return contactDao.getContacts(contactType)
+    suspend fun deleteContact(contact: Contact) = withContext(Dispatchers.IO) {
+        contactDao.deleteContact(contact)
     }
 
-    suspend fun upsertContact(contact: Contact) {
-        withContext(Dispatchers.IO) {
-            contactDao.upsertContact(contact)
-        }
-    }
-
-    suspend fun upsertContact(
-        countryCode: String,
-        phoneNumber: String,
-        contactType: ContactType
-    ) {
-        withContext(Dispatchers.IO) {
-            contactDao.upsertContact(
-                Contact(
-                    countryCode = countryCode,
-                    phoneNum = phoneNumber,
-                    accessDate = Date(),
-                    avatarRes = avatarStore.getAvatar(seed = countryCode + phoneNumber),
-                    type = contactType
-                )
-            )
-        }
-    }
-
-    suspend fun updateContact(
-        oldContact: Contact,
-        newContact: Contact
-    ) {
-        withContext(Dispatchers.IO) {
-            contactDao.updateContact(oldContact, newContact)
-        }
-    }
-
-    suspend fun deleteContact(contact: Contact) {
-        withContext(Dispatchers.IO) {
-            contactDao.deleteContact(contact)
-        }
-    }
-
-    suspend fun deleteAllContacts() {
-        withContext(Dispatchers.IO) {
-            contactDao.deleteAllContacts()
-        }
+    suspend fun deleteAllContacts() = withContext(Dispatchers.IO) {
+        contactDao.deleteAllContacts()
     }
 }

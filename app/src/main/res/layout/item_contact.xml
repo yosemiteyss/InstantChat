@@ -8,53 +8,40 @@
             name="contact"
             type="com.yosemitedev.instantchat.model.Contact" />
         <variable
-            name="contactListener"
+            name="listener"
             type="com.yosemitedev.instantchat.ui.contact.ContactAdapter.ContactAdapterListener" />
-        <import
-            type="com.yosemitedev.instantchat.model.ContactKt"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/spacing_mlarge"
-        android:paddingEnd="@dimen/spacing_mlarge"
-        android:paddingTop="@dimen/spacing_large"
+        android:padding="@dimen/spacing_mlarge"
         android:background="?attr/selectableItemBackground"
-        android:onLongClick="@{(view) -> contactListener.onContactLongClicked(view, contact)}"
-        android:paddingBottom="@dimen/spacing_large">
+        android:onClick="@{() -> listener.onContactClicked(contact)}"
+        android:onLongClick="@{(view) -> listener.onContactLongClicked(view, contact)}">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/contact_item_avatar_card_view"
-            android:layout_width="@dimen/contact_icon_size"
-            android:layout_height="@dimen/contact_icon_size"
-            android:layout_centerVertical="true"
-            app:shapeAppearance="@style/ShapeAppearance.InstantChat.SmallComponent"
+        <ImageView
+            android:id="@+id/contact_item_avatar_image_view"
+            android:layout_width="@dimen/avatar_list_item_icon_size"
+            android:layout_height="@dimen/avatar_list_item_icon_size"
+            android:contentDescription="@{contact.phoneNum}"
+            app:glideSrc="@{contact.avatarRes}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/contact_item_avatar_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/contact_avatar_image_content_desc"
-                app:glideSrc="@{contact.avatarRes}"
-                tools:src="@drawable/avatar_1_raster"/>
-
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/avatar_man_1"/>
 
         <TextView
             android:id="@+id/contact_item_phone_num_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_mlarge"
-            android:layout_toEndOf="@id/contact_item_avatar_card_view"
-            android:text="@{contact.name == null || contact.name.empty ? @string/contact_item_phone_num(contact.countryCode, contact.phoneNum) : contact.name}"
+            android:layout_toEndOf="@id/contact_item_avatar_image_view"
+            android:text="@{@string/contact_item_phone_num(contact.countryCode, contact.phoneNum)}"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/contact_item_access_date_text_view"
-            app:layout_constraintStart_toEndOf="@+id/contact_item_avatar_card_view"
+            app:layout_constraintStart_toEndOf="@+id/contact_item_avatar_image_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="+1 2025550127" />
 
@@ -65,12 +52,12 @@
             android:layout_below="@id/contact_item_phone_num_text_view"
             android:layout_marginStart="@dimen/spacing_mlarge"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_toEndOf="@id/contact_item_avatar_card_view"
-            android:text="@{ContactKt.getRelativeTimeSpan(contact)}"
+            android:layout_toEndOf="@id/contact_item_avatar_image_view"
+            android:text="@{contact.accessDateRelativeTimeSpan}"
             android:textAppearance="?attr/textAppearanceCaption"
-            android:textColor="@color/color_on_surface_emphasis_medium"
+            android:textColor="@color/material_on_surface_emphasis_medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/contact_item_avatar_card_view"
+            app:layout_constraintStart_toEndOf="@+id/contact_item_avatar_image_view"
             app:layout_constraintTop_toBottomOf="@+id/contact_item_phone_num_text_view"
             tools:text="Last used: 2019-01-02" />
 
@@ -79,14 +66,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/chat_button_title"
-            android:onClick="@{() -> contactListener.onContactClicked(contact)}"
+            android:contentDescription="@string/start_chat_button_title"
+            android:onClick="@{() -> listener.onContactClicked(contact)}"
             android:padding="@dimen/min_icon_touch_padding"
             android:src="@drawable/ic_send"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/color_on_surface_emphasis_medium" />
+            app:tint="@color/material_on_surface_emphasis_medium" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

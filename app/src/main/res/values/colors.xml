@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#ffffff</color>
 
-    <color name="white_50">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_alpha_20">#33000000</color>
 
-    <color name="black_800">#121212</color>
-    <color name="black_900">#000000</color>
+    <color name="grey">#121212</color>
 
-    <color name="blue_50">#eef0f2</color>
-    <color name="blue_200">#adbbc4</color>
-    <color name="blue_300">#8ca2ae</color>
-    <color name="blue_600">#4a6572</color>
-    <color name="blue_700">#344955</color>
-    <color name="blue_800">#232f34</color>
+    <color name="indigo_50">#E3E3EB</color>
+    <color name="indigo_200">#8B8CAA</color>
+    <color name="indigo_300">#5C5D88</color>
+    <color name="indigo_400">#393B6F</color>
+    <color name="indigo_500">#161855</color>
+    <color name="indigo_600">#13154E</color>
+    <color name="indigo_50_alpha_60">#99E3E3EB</color>
 
     <color name="orange_300">#fbd790</color>
     <color name="orange_400">#f9be64</color>
@@ -19,15 +21,6 @@
 
     <color name="red_200">#cf7779</color>
     <color name="red_400">#ff4c5d</color>
-
-    <color name="white_alpha_60">#99ffffff</color>
-
-    <color name="black_alpha_20">#33000000</color>
-    <color name="black_alpha_87">#de000000</color>
-    <color name="black_alpha_60">#99000000</color>
-
-    <color name="blue_50_alpha_60">#99eef0f2</color>
-    <color name="blue_800_alpha_60">#99232f34</color>
 
     <color name="nav_bar">@color/black_alpha_20</color>
 

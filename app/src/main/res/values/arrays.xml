@@ -17,10 +17,4 @@
         <item>@string/theme_system_title</item>
     </string-array>
 
-    <string-array name="themes_values">
-        <item>Light</item>
-        <item>Dark</item>
-        <item>System Default</item>
-    </string-array>
-
 </resources>

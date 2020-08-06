@@ -1,24 +1,24 @@
 package com.yosemitedev.instantchat.ui.settings
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yosemitedev.instantchat.*
 import com.yosemitedev.instantchat.repository.ContactRepository
-import com.yosemitedev.instantchat.repository.SettingsRepository
-import com.yosemitedev.instantchat.utils.Theme
-import com.yosemitedev.instantchat.utils.WAClient
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class SettingsViewModel @Inject constructor(
+class SettingsViewModel @ViewModelInject constructor(
     private val contactRepository: ContactRepository,
-    private val settingsRepository: SettingsRepository
+    private val preferencesManager: PreferencesManager,
+    private val themeManager: ThemeManager,
+    private val waClientManager: WAClientManager
 ) : ViewModel() {
 
     val themes: List<Theme>
-        get() = settingsRepository.getThemes()
+        get() = themeManager.getThemes()
 
     val waClients: List<WAClient>
-        get() = settingsRepository.getWAClients()
+        get() = waClientManager.getClients()
 
     fun deleteAllContacts() {
         viewModelScope.launch {
@@ -28,11 +28,10 @@ class SettingsViewModel @Inject constructor(
 
     fun setTheme(themeKey: String) {
         val theme = Theme.values().first { it.key == themeKey }
-        settingsRepository.setTheme(theme)
+        themeManager.applyTheme(theme)
     }
 
     fun setClient(packageName: String) {
-        val waClient = WAClient.values().first { it.packageName == packageName }
-        settingsRepository.setDefaultWAClient(waClient)
+        preferencesManager.defaultClient = packageName
     }
 }

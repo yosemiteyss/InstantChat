@@ -1,9 +1,7 @@
 <resources>
-
-    <!-- Minimum padding for a image button -->
     <dimen name="min_icon_touch_padding">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="contact_icon_size">48dp</dimen>
-    <dimen name="app_icon_size">34dp</dimen>
-
+    <dimen name="avatar_list_item_icon_size">48dp</dimen>
+    <dimen name="avatar_detail_icon_stroke_width_none">0dp</dimen>
+    <dimen name="avatar_detail_icon_stroke_width_selected">2dp</dimen>
 </resources>

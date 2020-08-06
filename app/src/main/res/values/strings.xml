@@ -2,33 +2,32 @@
     <string name="app_name">InstantChat</string>
 
     <!-- Home Fragment -->
-    <string name="app_icon_image_content_desc">App Icon</string>
-    <string name="contact_type_private_title">Private</string>
-    <string name="contact_type_work_title">Work</string>
-    <string name="tab_settings_title">Settings</string>
-    <string name="chat_button_title">Chat</string>
-
-    <!-- Hints -->
-    <string name="contact_name_input_hint">Name</string>
+    <string name="home_tab_category_private_title">Private</string>
+    <string name="home_tab_category_work_title">Work</string>
+    <string name="home_tab_settings_title">Settings</string>
     <string name="country_code_input_hint">Country Code</string>
     <string name="phone_number_input_hint">Phone Number</string>
-    <string name="contact_type_input_hint">Category</string>
+    <string name="category_private_title">Private</string>
+    <string name="category_work_title">Work</string>
+    <string name="start_chat_button_title">Chat</string>
 
     <!-- Contact Item -->
     <string name="contact_item_phone_num">+%s %s</string>
-    <string name="contact_edit_title">Edit</string>
     <string name="contact_remove_title">Remove</string>
+
+    <!-- No Contact -->
     <string name="no_contact_title">No Contact, yet</string>
-    <string name="no_contact_content">Enter phone number to start a new chat</string>
-    <string name="contact_avatar_image_content_desc">Contact Icon</string>
-    <string name="no_contact_image_content_desc">No Contact</string>
+    <string name="no_content_description">Enter phone number to start a new chat.</string>
+
+    <!-- Avatar -->
+    <string name="avatar_list_title">Icons</string>
 
     <!-- Settings -->
     <string name="settings_remove_all_title">Remove all contacts</string>
     <string name="settings_remove_all_message">Do you want to remove all the saved numbers?</string>
     <string name="settings_theme_title">App Theme</string>
-    <string name="settings_default_client_title">Default App</string>
-    <string name="settings_show_keyboard_title">Show Keyboard On Start</string>
+    <string name="settings_default_client_title">Default WhatsApp</string>
+    <string name="settings_show_input_sheet_title">Show Input Dialog On Start</string>
 
     <!-- Theme -->
     <string name="theme_light_title">Light</string>
@@ -40,17 +39,5 @@
     <string name="waclient_default_title">WhatsApp</string>
     <string name="waclient_business_title">WhatsApp Business</string>
     <string name="waclient_activity_not_found_message">WhatsApp client is not installed! Check your settings.</string>
-
-    <!-- Contact Edit -->
-    <string name="contact_edit_app_bar_title">Edit</string>
-    <string name="contact_edit_info_title">Info</string>
-    <string name="contact_edit_avatar_title">Icon</string>
-    <string name="contact_edit_name_image_content_desc">Edit Contact Name</string>
-    <string name="contact_edit_country_code_image_content_desc">Edit Country Code</string>
-    <string name="contact_edit_phone_number_image_content_desc">Edit Phone Number</string>
-    <string name="contact_edit_type_image_content_desc">Edit Contact Type</string>
-    <string name="avatar_item_checked_image_content_desc">Checked Icon</string>
-    <string name="contact_edit_country_code_empty">Country code cannot be empty.</string>
-    <string name="contact_edit_phone_number_empty">Phone number cannot be empty.</string>
 
 </resources>

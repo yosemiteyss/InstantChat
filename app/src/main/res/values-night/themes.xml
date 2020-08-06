@@ -7,6 +7,7 @@
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
     </style>
 
@@ -14,27 +15,30 @@
 
     <style name="Theme.InstantChat.Dark" parent="Theme.InstantChat">
         <!-- Colors -->
-        <item name="colorPrimary">@color/blue_200</item>
-        <item name="colorPrimaryVariant">@color/blue_300</item>
+        <item name="colorPrimary">@color/indigo_200</item>
+        <item name="colorPrimaryVariant">@color/indigo_300</item>
         <item name="colorSecondary">@color/orange_300</item>
         <item name="colorSecondaryVariant">@color/orange_300</item>
         <item name="colorError">@color/red_200</item>
-        <item name="colorPrimarySurfaceVariant">?attr/colorSurface</item>
 
-        <item name="android:colorBackground">@color/black_900</item>
-        <item name="colorSurface">@color/black_800</item>
-        <item name="scrimBackground">@color/black_alpha_87</item>
+        <item name="android:colorBackground">@color/black</item>
+        <item name="colorSurface">@color/grey</item>
 
-        <item name="colorOnPrimary">@color/black_900</item>
-        <item name="colorOnSecondary">@color/black_900</item>
-        <item name="colorOnError">@color/black_900</item>
-        <item name="colorOnBackground">@color/white_50</item>
-        <item name="colorOnSurface">@color/white_50</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnError">@color/black</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <item name="colorPrimaryBackground">@color/black</item>
+        <item name="colorOnPrimaryBackground">@color/white</item>
+        <item name="textFieldOnPrimaryBackground">@color/grey</item>
 
         <item name="elevationOverlayEnabled">true</item>
 
         <!-- System -->
-        <item name="android:statusBarColor">@color/black_alpha_60</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryBackground</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
 
     </style>

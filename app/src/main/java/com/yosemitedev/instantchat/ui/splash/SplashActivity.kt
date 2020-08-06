@@ -2,19 +2,21 @@ package com.yosemitedev.instantchat.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.yosemitedev.instantchat.InstantChat
 import com.yosemitedev.instantchat.R
-import com.yosemitedev.instantchat.ui.contact.MainActivity
+import com.yosemitedev.instantchat.ui.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
-    lateinit var splashComponent: SplashComponent
+    private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        splashComponent = (application as InstantChat).appComponent.splashComponent().create()
-        splashComponent.inject(this)
         super.onCreate(savedInstanceState)
+
+        // Navigate to MainActivity
         navigateToMain()
     }
 
@@ -29,6 +31,7 @@ class SplashActivity : AppCompatActivity() {
             R.anim.nav_default_enter_anim,
             R.anim.nav_default_exit_anim
         )
+
         finish()
     }
 }

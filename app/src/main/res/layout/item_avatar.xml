@@ -4,45 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="avatarItem"
-            type="com.yosemitedev.instantchat.ui.contact.AvatarItem" />
+            type="com.yosemitedev.instantchat.ui.avatar.AvatarItem" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/item_avatar_card_view"
-        android:layout_width="@dimen/contact_icon_size"
-        android:layout_height="@dimen/contact_icon_size"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatar_item_image_view"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_margin="@dimen/spacing_large"
-        android:animateLayoutChanges="true"
+        android:padding="@dimen/spacing_small"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearance="@style/ShapeAppearance.InstantChat.SmallComponent">
-
-        <ImageView
-            android:id="@+id/item_avatar_checked_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white_alpha_60"
-            android:contentDescription="@string/avatar_item_checked_image_content_desc"
-            android:elevation="@dimen/elevation_small"
-            android:padding="@dimen/spacing_xmedium"
-            android:src="@drawable/ic_check"
-            app:goneIf="@{!avatarItem.checked}"
-            app:tint="?attr/colorSurface" />
-
-        <ImageView
-            android:id="@+id/item_avatar_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/contact_avatar_image_content_desc"
-            app:glideSrc="@{avatarItem.drawable}"
-            tools:src="@drawable/avatar_1_raster" />
-
-    </com.google.android.material.card.MaterialCardView>
+        android:elevation="@dimen/elevation_small"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:srcCompat="@{avatarItem.drawableRes}"
+        app:strokeColor="?attr/colorSecondary"
+        app:strokeWidth="@{avatarItem.selected ? @dimen/avatar_detail_icon_stroke_width_selected : @dimen/avatar_detail_icon_stroke_width_none}"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.InstantChat.Avatar"
+        tools:src="@drawable/avatar_man_1"/>
 
 </layout>

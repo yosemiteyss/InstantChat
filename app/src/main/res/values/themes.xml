@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="ThemeOverlay.InstantChat.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.InstantChat.BottomSheet</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+    </style>
+    
+    <style name="ThemeOverlay.InstantChat.AlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="dialogCornerRadius">@dimen/medium_component_corner_radius</item>
+    </style>
+
     <style name="Theme.InstantChat.Splash.DayNight" parent="Theme.InstantChat.Splash"/>
 
     <style name="Theme.InstantChat.Splash" parent="Theme.InstantChat">
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
         <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
     </style>
 
@@ -14,22 +27,24 @@
 
     <style name="Theme.InstantChat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Colors -->
-        <item name="colorPrimary">@color/blue_700</item>
-        <item name="colorPrimaryVariant">@color/blue_600</item>
+        <item name="colorPrimary">@color/indigo_500</item>
+        <item name="colorPrimaryVariant">@color/indigo_600</item>
         <item name="colorSecondary">@color/orange_500</item>
         <item name="colorSecondaryVariant">@color/orange_400</item>
         <item name="colorError">@color/red_400</item>
-        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
 
-        <item name="android:colorBackground">@color/white_50</item>
-        <item name="colorSurface">@color/white_50</item>
-        <item name="scrimBackground">@color/white_alpha_60</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorSurface">@color/white</item>
 
-        <item name="colorOnPrimary">@color/white_50</item>
-        <item name="colorOnSecondary">@color/black_900</item>
-        <item name="colorOnError">@color/white_50</item>
-        <item name="colorOnBackground">@color/black_900</item>
-        <item name="colorOnSurface">@color/black_900</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorOnSurface">@color/black</item>
+
+        <item name="colorPrimaryBackground">@color/indigo_500</item>
+        <item name="colorOnPrimaryBackground">@color/white</item>
+        <item name="textFieldOnPrimaryBackground">@color/indigo_300</item>
 
         <!-- Shape -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.InstantChat.SmallComponent</item>
@@ -37,6 +52,7 @@
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.InstantChat.LargeComponent</item>
 
         <!-- Typography -->
+        <!--
         <item name="textAppearanceHeadline1">@style/TextAppearance.InstantChat.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.InstantChat.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.InstantChat.Headline3</item>
@@ -50,24 +66,22 @@
         <item name="textAppearanceButton">@style/TextAppearance.InstantChat.Button</item>
         <item name="textAppearanceCaption">@style/TextAppearance.InstantChat.Caption</item>
         <item name="textAppearanceOverline">@style/TextAppearance.InstantChat.Overline</item>
-
-        <!-- Emphasis -->
-        <item name="emphasisHighAlpha">0.87</item>
-        <item name="emphasisMediumAlpha">0.60</item>
-        <item name="emphasisDisabledAlpha">0.38</item>
+        -->
 
         <!-- Motion -->
         <item name="motionInterpolatorPersistent">@android:interpolator/fast_out_slow_in</item>
         <item name="motionInterpolatorIncoming">@android:interpolator/decelerate_cubic</item>
         <item name="motionInterpolatorOutgoing">@android:interpolator/accelerate_cubic</item>
 
+        <!-- Theme Overlay -->
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.InstantChat.BottomSheetDialog</item>
+        <item name="alertDialogTheme">@style/ThemeOverlay.InstantChat.AlertDialog</item>
+
         <!-- Styles -->
-        <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
-        <item name="tabStyle">@style/Widget.InstantChat.TabLayout</item>
-        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+        <item name="bottomSheetStyle">@style/Widget.InstantChat.BottomSheet</item>
 
         <!-- System -->
-        <item name="android:statusBarColor">@color/blue_800_alpha_60</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryBackground</item>
         <item name="android:navigationBarColor">@color/nav_bar</item>
         <item name="android:windowBackground">?android:colorBackground</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>

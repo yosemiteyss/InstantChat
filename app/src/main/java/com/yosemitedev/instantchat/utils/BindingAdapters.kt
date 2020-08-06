@@ -32,6 +32,22 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.google.android.material.elevation.ElevationOverlayProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
+
+@BindingAdapter("srcCompat")
+fun ShapeableImageView.bindSrcCompat(@DrawableRes drawableRes: Int?) {
+    if (drawableRes == null) return
+
+    val drawable = context.getDrawableOrNull(drawableRes)
+    this.setImageDrawable(drawable)
+}
+
+@BindingAdapter("showIf")
+fun FloatingActionButton.showIf(show: Boolean) {
+    if (show) show()
+    else hide()
+}
 
 @BindingAdapter("requestFocus")
 fun View.bindRequestFocus(requestFocus: Boolean) {
