@@ -15,7 +15,6 @@ class AvatarViewModel @ViewModelInject constructor(
     private val avatarStore: AvatarStore
 ) : ViewModel() {
 
-    // Avatar List
     val avatars: LiveData<List<Int>> = liveData {
         emit(avatarStore.avatars)
     }

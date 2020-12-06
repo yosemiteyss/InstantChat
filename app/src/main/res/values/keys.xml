@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="pref_key_first_launch" translatable="false">first_launch</string>
-    <string name="pref_key_navigate_to_edit" translatable="false">navigate_to_edit</string>
-    <string name="pref_key_default_theme" translatable="false">default_theme</string>
-    <string name="pref_key_default_client" translatable="false">default_client</string>
-    <string name="pref_key_remove_all_contacts" translatable="false">remove_all_contacts</string>
-    <string name="pref_key_db_prepopulated" translatable="false">db_prepopulated</string>
-</resources>

@@ -13,7 +13,6 @@
 
     <!-- Contact Item -->
     <string name="contact_item_phone_num">+%s %s</string>
-    <string name="contact_remove_title">Remove</string>
 
     <!-- No Contact -->
     <string name="no_contact_title">No Contact, yet</string>
@@ -23,11 +22,10 @@
     <string name="avatar_list_title">Icons</string>
 
     <!-- Settings -->
-    <string name="settings_remove_all_title">Remove all contacts</string>
-    <string name="settings_remove_all_message">Do you want to remove all the saved numbers?</string>
+    <string name="settings_remove_contacts_title">Remove all contacts</string>
+    <string name="settings_remove_contacts_message">Do you want to remove all the saved numbers?</string>
     <string name="settings_theme_title">App Theme</string>
     <string name="settings_default_client_title">Default WhatsApp</string>
-    <string name="settings_show_input_sheet_title">Show Input Dialog On Start</string>
 
     <!-- Theme -->
     <string name="theme_light_title">Light</string>

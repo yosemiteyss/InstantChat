@@ -16,8 +16,9 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Navigate to MainActivity
-        navigateToMain()
+        viewModel.navigateToMain.observe(this) {
+            navigateToMain()
+        }
     }
 
     private fun navigateToMain() {
@@ -31,7 +32,6 @@ class SplashActivity : AppCompatActivity() {
             R.anim.nav_default_enter_anim,
             R.anim.nav_default_exit_anim
         )
-
         finish()
     }
 }

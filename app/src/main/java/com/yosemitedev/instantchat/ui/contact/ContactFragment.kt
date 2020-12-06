@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.yosemitedev.instantchat.R
 import com.yosemitedev.instantchat.databinding.FragmentContactBinding
 import com.yosemitedev.instantchat.model.Category
 import com.yosemitedev.instantchat.model.Contact
-import com.yosemitedev.instantchat.ui.home.HomeFragmentDirections
+import com.yosemitedev.instantchat.ui.avatar.AvatarBottomSheet
 import com.yosemitedev.instantchat.ui.home.HomeViewModel
 import com.yosemitedev.instantchat.utils.AutoClearedValue
 import com.yosemitedev.instantchat.utils.bindGoneIf
@@ -27,18 +25,13 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 class ContactFragment : Fragment(), ContactAdapter.ContactAdapterListener {
 
     private var binding: FragmentContactBinding by AutoClearedValue(this)
-
     private val viewModel: HomeViewModel by parentViewModels()
-
-    private val category: Category by lazy {
-        requireArguments().getSerializable(ARG_CATEGORY) as Category
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentContactBinding.inflate(inflater, container, false)
 
         // Setup recycler view
@@ -51,6 +44,7 @@ class ContactFragment : Fragment(), ContactAdapter.ContactAdapterListener {
         }
 
         // Register data observers
+        val category = requireArguments().getSerializable(ARG_CATEGORY) as Category
         viewModel.getContacts(category).observe(viewLifecycleOwner) {
             contactAdapter.submitList(it)
             binding.noContactLayout.root.bindGoneIf(it.isNotEmpty())
@@ -121,16 +115,15 @@ class ContactFragment : Fragment(), ContactAdapter.ContactAdapterListener {
         return ItemTouchHelper(callback)
     }
 
-
     private fun navigateToAvatarBottomSheet(contact: Contact) {
-        findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToAvatarBottomSheet(contact)
-        )
+        AvatarBottomSheet.newInstance(contact)
+            .show(childFragmentManager, AvatarBottomSheet.TAG)
     }
 
     companion object {
         private const val ARG_CATEGORY = "category"
 
+        @JvmStatic
         fun newInstance(category: Category): ContactFragment {
             return ContactFragment().apply {
                 arguments = Bundle().apply {

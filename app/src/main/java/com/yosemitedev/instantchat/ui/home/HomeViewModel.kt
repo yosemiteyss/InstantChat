@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.yosemitedev.instantchat.PreferencesManager
-import com.yosemitedev.instantchat.WAClient
-import com.yosemitedev.instantchat.WAClientManager
+import com.yosemitedev.instantchat.managers.PreferencesManager
+import com.yosemitedev.instantchat.managers.WAClient
+import com.yosemitedev.instantchat.managers.WAClientManager
 import com.yosemitedev.instantchat.model.Category
 import com.yosemitedev.instantchat.model.Contact
 import com.yosemitedev.instantchat.repository.ContactRepository
@@ -17,6 +17,7 @@ import com.yosemitedev.instantchat.utils.SingleLiveEvent
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -27,23 +28,17 @@ class HomeViewModel @ViewModelInject constructor(
     private val avatarStore: AvatarStore
 ) : ViewModel() {
 
-    // Start WhatsApp activity intent events
+    private val _countryCodeInputChannel = ConflatedBroadcastChannel<String>()
+    private val _phoneNumInputChannel = ConflatedBroadcastChannel<String>()
+    private val _categoryInputChannel = ConflatedBroadcastChannel<Category>()
+
     private val _launchClient = SingleLiveEvent<Intent>()
     val launchClient: LiveData<Intent>
         get() = _launchClient
 
-    // Toast messages events
     private val _toastMessage = SingleLiveEvent<String>()
     val toastMessage: LiveData<String>
         get() = _toastMessage
-
-
-
-    private val _countryCodeInputChannel = ConflatedBroadcastChannel<String>()
-
-    private val _phoneNumInputChannel = ConflatedBroadcastChannel<String>()
-
-    private val _categoryInputChannel = ConflatedBroadcastChannel<Category>()
 
     val showExtraInputFields: LiveData<Boolean> =
         _countryCodeInputChannel
@@ -51,7 +46,6 @@ class HomeViewModel @ViewModelInject constructor(
             .combine(_phoneNumInputChannel.asFlow()) { countryCode, phoneNum ->
                 countryCode.isNotBlank() && phoneNum.isNotBlank()
             }.asLiveData(viewModelScope.coroutineContext)
-
 
     fun setCountryCodeInput(countryCode: String) {
         _countryCodeInputChannel.offer(countryCode)
@@ -93,7 +87,6 @@ class HomeViewModel @ViewModelInject constructor(
         )
     }
 
-
     fun deleteContact(contact: Contact) {
         viewModelScope.launch {
             contactRepository.deleteContact(contact)
@@ -104,9 +97,10 @@ class HomeViewModel @ViewModelInject constructor(
         return contactRepository.getContacts(category)
     }
 
-    private fun startChatActivity(contact: Contact) {
+    private fun startChatActivity(contact: Contact) = viewModelScope.launch {
+        val defaultClient = preferencesManager.getDefaultWAClient().first()
         val intent = waClientManager.getIntent(
-            client = WAClient.values().first { it.packageName == preferencesManager.defaultClient },
+            client = WAClient.values().first { it.packageName == defaultClient },
             countryCode = contact.countryCode,
             phoneNum = contact.phoneNum
         )

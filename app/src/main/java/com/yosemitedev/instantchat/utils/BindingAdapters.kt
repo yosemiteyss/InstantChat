@@ -36,6 +36,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 
 @BindingAdapter("srcCompat")
+fun ImageView.bindSrcCompat(@DrawableRes drawableRes: Int?) {
+    if (drawableRes == null) return
+
+    val drawable = context.getDrawableOrNull(drawableRes)
+    this.setImageDrawable(drawable)
+}
+
+@BindingAdapter("srcCompat")
 fun ShapeableImageView.bindSrcCompat(@DrawableRes drawableRes: Int?) {
     if (drawableRes == null) return
 
@@ -90,55 +98,6 @@ fun TextView.bindDrawables(
         context.getDrawableOrNull(drawableBottom)
     )
 }
-
-/*
-/**
- * Set a Chip's leading icon using Glide.
- *
- * Optionally set the image to be center cropped and/or cropped to a circle.
- */
-@BindingAdapter(
-    "glideChipIcon",
-    "glideChipIconCenterCrop",
-    "glideChipIconCircularCrop",
-    requireAll = false
-)
-fun Chip.bindGlideChipSrc(
-    @DrawableRes drawableRes: Int?,
-    centerCrop: Boolean = false,
-    circularCrop: Boolean = false
-) {
-    if (drawableRes == null) return
-
-    createGlideRequest(
-        context,
-        drawableRes,
-        centerCrop,
-        circularCrop
-    ).listener(object : RequestListener<Drawable> {
-        override fun onLoadFailed(
-            e: GlideException?,
-            model: Any?,
-            target: Target<Drawable>?,
-            isFirstResource: Boolean
-        ): Boolean = true
-
-        override fun onResourceReady(
-            resource: Drawable?,
-            model: Any?,
-            target: Target<Drawable>?,
-            dataSource: DataSource?,
-            isFirstResource: Boolean
-        ): Boolean {
-            chipIcon = resource
-            return true
-        }
-    }).submit(
-        resources.getDimensionPixelSize(R.dimen.chip_icon_diameter),
-        resources.getDimensionPixelSize(R.dimen.chip_icon_diameter)
-    )
-}
-*/
 
 @BindingAdapter(
     "glideSrc",
