@@ -1,6 +1,5 @@
 package com.yosemitedev.instantchat.ui.splash
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,10 +7,13 @@ import com.yosemitedev.instantchat.managers.PreferencesManager
 import com.yosemitedev.instantchat.managers.ThemeManager
 import com.yosemitedev.instantchat.managers.WAClientManager
 import com.yosemitedev.instantchat.utils.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SplashViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SplashViewModel @Inject constructor(
     preferencesManager: PreferencesManager,
     themeManager: ThemeManager,
     waClientManager: WAClientManager

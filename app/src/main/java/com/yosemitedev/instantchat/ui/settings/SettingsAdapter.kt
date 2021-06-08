@@ -46,7 +46,7 @@ class SettingsAdapter(
                     MaterialAlertDialogBuilder(preferenceLayout.context)
                         .setTitle(currentItem.actionPreference.title)
                         .setMessage(currentItem.actionPreference.dialogMessage)
-                        .setPositiveButton(android.R.string.ok) { dialog, _ ->
+                        .setPositiveButton(android.R.string.ok) { _, _ ->
                             listener.onActionPreferenceConfirmed(currentItem.actionPreference.key)
                         }
                         .setNegativeButton(android.R.string.cancel) { dialog, _ ->

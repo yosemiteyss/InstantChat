@@ -1,7 +1,6 @@
 package com.yosemitedev.instantchat.ui.settings
 
 import android.content.Context
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,12 +13,15 @@ import com.yosemitedev.instantchat.ui.settings.PreferenceKeys.DEFAULT_WA_CLIENT
 import com.yosemitedev.instantchat.ui.settings.PreferenceKeys.REMOVE_CONTACTS
 import com.yosemitedev.instantchat.ui.settings.SettingsListModel.ActionPreferenceModel
 import com.yosemitedev.instantchat.ui.settings.SettingsListModel.ListPreferenceModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingsViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val contactRepository: ContactRepository,
     private val preferencesManager: PreferencesManager,

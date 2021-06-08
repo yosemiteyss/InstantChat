@@ -1,16 +1,18 @@
 package com.yosemitedev.instantchat.ui.avatar
 
 import androidx.annotation.DrawableRes
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.yosemitedev.instantchat.model.Contact
 import com.yosemitedev.instantchat.repository.ContactRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AvatarViewModel @ViewModelInject constructor(
+@HiltViewModel
+class AvatarViewModel @Inject constructor(
     private val contactRepository: ContactRepository,
     private val avatarStore: AvatarStore
 ) : ViewModel() {

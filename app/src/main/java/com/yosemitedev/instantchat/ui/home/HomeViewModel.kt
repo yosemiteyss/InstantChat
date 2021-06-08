@@ -1,7 +1,6 @@
 package com.yosemitedev.instantchat.ui.home
 
 import android.content.Intent
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -14,14 +13,17 @@ import com.yosemitedev.instantchat.model.Contact
 import com.yosemitedev.instantchat.repository.ContactRepository
 import com.yosemitedev.instantchat.ui.avatar.AvatarStore
 import com.yosemitedev.instantchat.utils.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class HomeViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val contactRepository: ContactRepository,
     private val waClientManager: WAClientManager,
     private val preferencesManager: PreferencesManager,
@@ -40,12 +42,12 @@ class HomeViewModel @ViewModelInject constructor(
     val toastMessage: LiveData<String>
         get() = _toastMessage
 
-    val showExtraInputFields: LiveData<Boolean> =
-        _countryCodeInputChannel
+    val showExtraInputFields: LiveData<Boolean> = _countryCodeInputChannel
             .asFlow()
             .combine(_phoneNumInputChannel.asFlow()) { countryCode, phoneNum ->
                 countryCode.isNotBlank() && phoneNum.isNotBlank()
-            }.asLiveData(viewModelScope.coroutineContext)
+            }
+            .asLiveData(viewModelScope.coroutineContext)
 
     fun setCountryCodeInput(countryCode: String) {
         _countryCodeInputChannel.offer(countryCode)

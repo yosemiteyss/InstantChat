@@ -9,9 +9,9 @@ android {
 
     defaultConfig {
         applicationId "com.yosemitedev.instantchat"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
-        versionCode 21
+        versionCode 23
         versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -35,73 +35,43 @@ android {
         targetCompatibility = 1.8
     }
 
+    buildFeatures {
+        dataBinding = true
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs += [
+                "-Xuse-experimental=kotlin.ExperimentalStdlibApi",
                 "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-Xuse-experimental=kotlinx.coroutines.FlowPreview",
-                "-Xuse-experimental=kotlin.ExperimentalStdlibApi",
-                "-Xuse-experimental=androidx.paging.ExperimentalPagingApi"
         ]
-    }
-
-    buildFeatures {
-        dataBinding = true
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    // AndroidX
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.legacy:legacy-support-v4:$legacy_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
     implementation "androidx.preference:preference-ktx:$preference_version"
-
-    // Testing
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test:runner:$test_runner_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_vesrion"
-
-    // Material Component
     implementation "com.google.android.material:material:$material_version"
-
-    // Room
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-
-    // Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-
-    // Fragment
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
-
-    // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    // Hilt ViewModel
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
-    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
-
-    // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
-
-    // LeakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
-
-    // Data Store
     implementation "androidx.datastore:datastore-preferences:$data_store_version"
-
-    // Others
     implementation "it.xabaras.android:recyclerview-swipedecorator:$swipe_decorator_version"
+
+    kapt "androidx.room:room-compiler:$room_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 }
